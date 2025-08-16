@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --main-color: #1c1c1c;
+    --main-bg: #ffffff;
+    --input-bg: #f5f5f5;
+    --border-color: #c0c0c0;
+    --border-sec: #333131;
+    --main-btn: #1f3b4d;
+    --hover-btn: #a0915c;
+    --error-color: #b00020;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    transition: 0.2s linear;
+}
+
+header {
+    background: var(--main-color);
+    color: var(--main-bg);
+    padding: 1em 2em;
+    display: flex;
+    align-items: center;
+    width: 95.82dvw;
+}
+
+header div {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+header h1 {
+    margin-left: 1em;
+    letter-spacing: 0.05em;
+    color: var(--input-bg);
+}
+
+button.account {
+ outline: none;
+ cursor: pointer;
+ border: 1px solid var(--border-color);
+ padding: 0.7rem 2rem;
+ margin: 0;
+ font-family: inherit;
+ font-size: inherit;
+ position: relative;
+ display: inline-block;
+ letter-spacing: 0.04rem;
+ font-weight: 700;
+ font-size: 14px;
+ border-radius: 500px;
+ overflow: hidden;
+ background: var(--border-color);
+ color: var(--border-color);
+}
+
+button.account span {
+ position: relative;
+ z-index: 10;
+ transition: color 0.4s;
+ display: flex;
+ align-items: center;
+}
+button.account span svg {
+    margin-right: 0.3em;
+}
+
+button.account:hover span {
+ color: var(--main-color);
+}
+
+button.account::before,
+button.account::after {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ z-index: 0;
+}
+
+button.account::before {
+ content: "";
+ background: var(--main-color);
+ width: 120%;
+ left: -10%;
+ transform: skew(30deg);
+ transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+button.account:hover::before {
+ transform: translate3d(100%, 0, 0);
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    width: 97.90dvw;
+    background: var(--border-color);
+    padding: 0 1em;
+}
+
+.navigateBtn {
+    width: 5em;
+    height: 5em;
+    padding: 0.3em;
+    border-radius: 5px;
+    border: none;
+    background: transparent;
+}
+
+.navigateBtn span {
+    padding: 0.3em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--border-sec)
+}
+
+.navigateBtn:hover {
+    background: #d2d2d2;
+}
+
+.navigateBtn span:hover {
+    font-weight: 500;
+    color: var(--main-btn);
+}
+
+.container {
+    display: none;
+}
+
+.default {
+    display: none;
+}
+
+#clientes {
+    display: block;
+}
+
+div.search {
+    padding: 0.5em 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+div.search label {
+    margin-left: 2em;
+    font-size: 0.9em;
+}
+
+.searchInput {
+    width: 20em;
+    padding: 0.5em;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.searchInput:focus {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.searchBtn {
+    background: var(--main-btn);
+    width: 2.2em;
+    height: 2.2em;
+    border: none;
+    border-radius: 5px;
+}
+
+.searchBtn:hover {
+    transform: translateY(-2px);
+}
+
+.searchBtn svg {
+    color: #fff;
+}
+
+.clearInput {
+    background: var(--input-bg);
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: 5px;
+    border: 1px solid var(--error-color);
+    background: var(--main-bg);
+}
+
+.clearInput svg {
+    color: var(--error-color);
+}
+
+.clearInput:hover {
+    transform: translateY(-2px);
+}
+
+table {
+    width: 98%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+table td {
+    border-bottom: 1px solid var(--main-color);
+    padding: 0.5em;
+}
+
+.legenda {
+    text-align: center;
+    font-weight: bold;
+    color: var(--main-btn);
+}
+
+.actionButton {
+    border: none;
+    background: none;
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionButton:hover {
+    background: var(--border-color);
+}
+
+.hidden {
+    display: none;
+}
+
+.customerInput, .propertyInput, .contractInput, .contractInputInfo {
+    padding: 0.3em;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+    margin: 0.3em;
+}
+
+.contractInput, .contractInputInfo {
+    margin: 0.5em;
+}
+
+.contractForm label {
+    margin: 0.7em 0.5em 0 0.5em;
+}
+
+.readonly {
+    background: #d2d2d2;
+}
+
+dialog {
+    padding: 1em;
+    margin: auto;
+    border: none;
+    box-shadow: 0 0 100em rgba(0, 0, 0, 0.5);
+    border-radius: 0.5em;
+    width: 35dvw;
+}
+
+#closeBtn, #closeBtn2, #saveBtn, #saveBtn2 {
+    margin: 5px auto;
+    text-align: center;
+    padding: 0.5em 3em;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+#closeBtn:hover, #closeBtn2:hover {
+    background: var(--border-color);
+}
+
+#saveBtn, #saveBtn2 {
+    background: var(--main-btn);
+    font-weight: 500;
+    color: #fff;
+}
+
+#saveBtn:hover, #saveBtn2:hover {
+    background: var(--hover-btn);
+}
+
+div.buttonDiv {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.contractForm {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    max-width: 50dvw;
+    margin: auto;
+}
+
+.contractForm button {
+    width: 15em;
+    padding: 0.5em;
+    margin: 0.5em auto;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    background: var(--main-btn);
+    border: none;
+    border-radius: 1px;
+}
+
+.contractForm button:hover {
+    background: var(--hover-btn);
+}
+
+.aluguelInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* .autocomplete-results {
+    background: var(--border-color);
+    margin: 0 0.5em;
+}
+
+.autocomplete-item {
+    margin: 0.5em;
+} */
+
+.autocomplete-wrapper {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.autocomplete-wrapper input {
+    width: 98.1%; /* Input ocupa toda a largura do wrapper */
+    box-sizing: border-box; /* Garante que padding/border não quebre layout */
+    margin: 0.5em;
+}
+
+.autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--main-bg);
+    /* border: 1px solid var(--border-color); */
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.autocomplete-item {
+    cursor: pointer;
+    padding: 0.5em;
+    background: var(--input-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.autocomplete-item:hover {
+    background: var(--border-color);
+}

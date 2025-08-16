@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CostaDoc - Dashboard</title>
+    <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>CostaDoc</h1>
+        <div>
+            <button class="account" onclick="logout()">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    </svg>
+                    SAIR DA CONTA
+                </span>
+            </button>
+        </div>
+    </header>
+    <main>
+        <div class="navigation">
+            <button class="navigateBtn" id="clientesBtn" onclick="customerTab()">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    </svg>
+                    Clientes
+                </span>
+            </button>
+            <button class="navigateBtn" id="imoveisBtn" onclick="propertyTab()">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                        <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+                    </svg>
+                    Imóveis
+                </span>
+            </button>
+            <button class="navigateBtn" id="contratoBtn" onclick="contractTab()">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-file-earmark-font-fill" viewBox="0 0 16 16">
+                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M5.057 6h5.886L11 8h-.5c-.18-1.096-.356-1.192-1.694-1.235l-.298-.01v5.09c0 .47.1.582.903.655v.5H6.59v-.5c.799-.073.898-.184.898-.654V6.755l-.293.01C5.856 6.808 5.68 6.905 5.5 8H5z"/>
+                    </svg>
+                    Gerar contrato
+                </span>
+            </button>
+        </div>
+
+
+        <div class="default" style="padding: 1em;">
+            <p>Bem-vindo(a)! O que deseja fazer hoje?</p>
+        </div>
+
+        <div class="container" id="listagem-dados">
+            <div class="search">
+                <input type="text" name="searchInput" class="searchInput" placeholder="Pesquisar por nome ou CPF">
+                <button class="searchBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+                <button class="clearInput">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </button>
+                <label for="filter">Organizar por:</label>
+                <select name="filter" class="filter" id="filter">
+                    <option value="recente">Mais recentes</option>
+                    <option value="porNome">Por nome</option>
+                </select>
+            </div>
+            <table class="dataTable">
+                <tr class="legenda">
+                    <td>Nome</td>
+                    <td class="cpf-header">CPF</td>
+                    <td>Ações</td>
+                </tr>
+            </table>
+        </div>
+
+        <dialog class="customerView">
+            <form class="customerForm">
+                <label for="name">Nome completo:</label>
+                <input class="customerInput" type="text" name="nomeCliente" id="name" placeholder="Nome" required>
+                <div>
+                    <label for="cpf">CPF:</label>
+                    <input class="customerInput" type="text" name="cpf" id="cpf" maxlength="14" placeholder="000.000.000-00" required>
+                    <label for="dataNascimento">Data de Nascimento:</label>
+                    <input class="customerInput" type="text" name="dataNasc" id="dataNascimento" maxlength="10" placeholder="dd/mm/aaaa" required>
+                </div>
+                <div>
+                    <label for="estadoCivil">Estado Civil:</label>
+                    <select class="customerInput" id="estadoCivil" name="estadoCivil" required>
+                        <option value="">Selecione...</option>
+                        <option value="solteiro">Solteiro(a)</option>
+                        <option value="casado">Casado(a)</option>
+                        <option value="divorciado">Divorciado(a)</option>
+                        <option value="separado">Separado(a)</option>
+                        <option value="viuvo">Viúvo(a)</option>
+                        <option value="uniaoEstavel">União Estável</option>
+                    </select>
+                    <label for="profession">Profissão:</label>
+                    <input class="customerInput" type="text" name="profissao" id="profession" placeholder="Profissão" required>
+                </div>
+                <div>
+                    <label for="cep">CEP:</label>
+                    <input class="customerInput" type="text" name="cepCliente" id="cep" maxlength="10" placeholder="00.000-000" required>
+                    <label for="logradouro">Logradouro:</label>
+                    <input class="customerInput" type="text" name="logradouroCliente" id="logradouro" placeholder="Rua, avenida..." required>
+                </div>
+                <div>
+                    <label for="number">Número:</label>
+                    <input class="customerInput" type="text" name="numeroCliente" id="number" required>
+                    <label for="bairro">Bairro:</label>
+                    <input class="customerInput" type="text" name="bairroCliente" id="bairro" required>
+                </div>
+                <div>
+                    <label for="cidade">Município:</label>
+                    <input class="customerInput" type="text" name="municipioCliente" id="cidade" required>
+                    <label for="uf">Estado:</label>
+                    <input class="customerInput" type="text" name="ufCliente" id="uf" required>
+                </div>
+                <div class="buttonDiv">
+                    <button type="submit" id="saveBtn">Salvar</button>
+                    <button id="closeBtn">Fechar</button>
+                </div>
+            </form>
+        </dialog>
+
+        <dialog class="propertyView">
+            <form class="propertyForm">
+                <label for="name">Nome completo do proprietário:</label>
+                <input class="propertyInput" type="text" name="nomeProp" id="name" placeholder="Nome" required>
+                <div>
+                    <label for="cep">CEP:</label>
+                    <input class="propertyInput" type="text" id="cep" name="cepImovel" maxlength="10" placeholder="00.000-000" required>
+                    <label for="logradouro">Logradouro:</label>
+                    <input class="propertyInput" type="text" name="logradouroImovel" id="logradouro" placeholder="Rua, avenida..." required>
+                </div>
+                <div>
+                    <label for="number">Número:</label>
+                    <input class="propertyInput" type="text" name="numeroImovel" id="number" required>
+                    <label for="bairro">Bairro:</label>
+                    <input class="propertyInput" type="text" name="bairroImovel" id="bairro" required>
+                </div>
+                <div>
+                    <label for="cidade">Município:</label>
+                    <input class="propertyInput" type="text" name="municipioImovel" id="cidade" required>
+                    <label for="uf">Estado:</label>
+                    <input class="propertyInput" type="text" name="ufImovel" id="uf" required>
+                </div>
+                <div>
+                    <label for="objeto">Objeto:</label>
+                    <input class="propertyInput" type="text" name="objeto" id="objeto">
+                    <label for="frente">Frente para:</label>
+                    <input class="propertyInput" type="text" name="frente" id="frente">
+                </div>
+                <div>
+                    <label for="norte">Medida norte:</label>
+                    <input class="propertyInput" type="text" id="norte" name="medNorte" placeholder="Ex.: 9m (nove metros)">
+                    <label for="conf_norte">Confinante norte:</label>
+                    <input class="propertyInput" type="text" name="confinanteNorte" id="conf_norte">
+                </div>
+                <div>
+                    <label for="sul">Medida sul:</label>
+                    <input class="propertyInput" type="text" id="sul" name="medSul" placeholder="Ex.: 9m (nove metros)">
+                    <label for="conf_sul">Confinante sul:</label>
+                    <input class="propertyInput" type="text" name="confinanteSul" id="conf_sul">
+                </div>
+                <div>
+                    <label for="leste">Medida leste:</label>
+                    <input class="propertyInput" type="text" id="leste" name="medLeste" placeholder="Ex.: 6m (seis metros)">
+                    <label for="conf_leste">Confinante leste:</label>
+                    <input class="propertyInput" type="text" name="confinanteLeste" id="conf_leste">
+                </div>
+                <div>
+                    <label for="oeste">Medida oeste:</label>
+                    <input class="propertyInput" type="text" id="oeste" name="medOeste" placeholder="Ex.: 6m (seis metros)">
+                    <label for="conf_oeste">Confinante oeste:</label>
+                    <input class="propertyInput" type="text" name="confinanteOeste" id="conf_oeste">
+                </div>
+                <div>
+                    <label for="valor">Valor completo e por extenso:</label>
+                    <input class="propertyInput" type="text" name="valor" id="valor" placeholder="Ex.: R$ 100.000 (cem mil reais)">
+                </div>
+                <div>
+                    <label for="local">Localização (Google):</label>
+                    <input class="propertyInput" type="text" name="local" id="local">
+                </div>
+                <div class="buttonDiv">
+                    <button type="submit" id="saveBtn2">Salvar</button>
+                    <button id="closeBtn2">Fechar</button>
+                </div>
+            </form>
+        </dialog>
+        <div class="container" id="contratos">
+            <h3 style="margin: 1em; text-align: center;">Geração de contrato</h3>
+            <form class="contractForm">
+                <label for="nomeCliente1">Selecionar cliente 1 (vendedor/locador):</label>
+                <div class="autocomplete-wrapper">
+                    <input class="contractInput" type="text" name="nomeCliente1" id="nomeCliente1" autocomplete="off" required>
+                    <div id="resultadosCliente1" class="autocomplete-results"></div>
+                </div>
+
+                <label for="nomeCliente2">Selecionar cliente 2 (comprador/locatário):</label>
+                <div class="autocomplete-wrapper">
+                    <input class="contractInput" type="text" name="nomeCliente2" id="nomeCliente2" autocomplete="off" required>
+                    <div id="resultadosCliente2" class="autocomplete-results"></div>
+                </div>
+
+                <div>
+                    <label for="tipo">Tipo de contrato:</label>
+                    <select name="tipo" id="tipo" style="width: 10em;">
+                        <option value="locacao">Aluguel</option>
+                        <option value="compra">Compra e venda</option>
+                    </select>
+                </div>
+                <label for="imovel">Imóvel:</label>
+                <div class="autocomplete-wrapper">
+                    <input class="contractInput" type="text" name="imovel" id="imovel" autocomplete="off" required>
+                    <div id="resultadosImovel" class="autocomplete-results"></div>
+                </div>
+
+                <div class="aluguelInfo">
+                    <label for="prazo">Prazo do contrato:</label>
+                    <input class="contractInputInfo" type="text" name="prazo" id="prazo" required>
+                    <label for="dataInicio">Data de início:</label>
+                    <input class="contractInputInfo" type="text" name="dataInicio" id="dataInicio" required>
+                    <label for="diaPagamento">Dia de pagamento:</label>
+                    <input class="contractInputInfo" type="text" name="diaPagamento" id="diaPagamento" required>
+                    <label for="valorAluguel">Valor do aluguel:</label>
+                    <input class="contractInputInfo" type="text" name="valorAluguel" id="valorAluguel" required>
+                </div>
+                <label for="dataContrato">Data do contrato:</label>
+                <input class="contractInputInfo" type="text" name="dataContrato" id="dataContrato">
+                <button type="submit">Gerar contrato</button>
+            </form>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/dashboard.js"></script>
+</body>
+</html>
