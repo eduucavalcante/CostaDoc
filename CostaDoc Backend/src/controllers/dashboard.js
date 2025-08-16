@@ -305,6 +305,11 @@ export const generateContract = (req, res) => {
 
         const outPath = path.resolve(__dirname, '..', 'templates', 'generated', `contrato-${data.imovel.nomeProp}.docx`);
 
+        const dir = path.dirname(outPath);
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
         const buf = doc.getZip().generate({ type: 'nodebuffer' });
         fs.writeFileSync(outPath, buf);
 
